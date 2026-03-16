@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Git History</title>
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="stylesheet" href="./dist/reset.css" />
+    <link rel="stylesheet" href="./dist/reveal.css" />
+    <link rel="stylesheet" href="./dist/theme/solarized.css" id="theme" />
+    <link rel="stylesheet" href="./css/highlight/base16/zenburn.css" />
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown data-separator="----" data-separator-vertical="---">
+          <textarea data-template>
+            
+Git History
+
+<img src="./media/git-icon-logo-svgrepo-com.svg" width="500" height="500" />
+
+
+Note:
+
+- Intro:
+
+
+----
+# Stakeholder
+
+- Release Engineer
+- Quality Assurance
+- DevSecOps
+- Maintainer
+- Developer
+
+
+---
+## Release Engineer
+
+- Pick and pin the source version for a release
+- Create the changes section within release notes
+
+
+---
+## Quality Assurance
+
+- Determine which commits constitute a release
+- Verify review signoffs of all commits that contribute to a release
+- Verify that authors, committers and reviewers have confirmed QM that they
+  follow all QM policies (SOP)
+
+
+---
+## DevSecOps
+
+- Verify that only trusted source (composed only of verified commits) is used
+  for production/release build
+
+
+---
+## Maintainer
+
+- Trace down bugs as fast as possible
+- Apply bugfixes on all supported/maintained branches
+
+
+---
+## Developer
+
+- Understand where to base new work on
+
+
+----
+# Producer
+
+... of git history are
+
+- Developer
+- Maintainer
+- Release Engineer
+
+
+----
+# Requirements
+
+- Small atomic commits
+- Single topic, single scope
+- Signoff
+- PGP secured commit for authenticity
+- Self-contained commits
+- No diamonds - long chain
+- Enforced branch strategy
+
+
+----
+# Workshop Part
+
+
+----
+# Signing
+
+- commits, tags
+- with PKI (pgp/ssh) ==> "verified commits"
+
+
+---
+## Signing - embedded in commit
+
+```
+tree <hash>
+parent <hash>
+author ...
+committer ...
+gpgsig --BEGIN PGP SIGNATURE--
+
+--END PGP SIGNATURE--
+<commit message>
+```
+
+
+---
+## Crypto - by the last committer
+
+```
+Signed-off-by: Author
+Reviewed-by: Reviewer
+Acked-by: Maintainer
+Signed-off-by: Maintainer
+```
+
+
+---
+## What is sign-off?
+
+is a leagal statement:
+(Developer Certificate of Origin) = DCO
+no cryptography
+
+
+----
+# Commit
+
+Small atomic commits
+- One topic
+- One scope
+[https://conventionalcommit.org](https://conventionalcommit.org)
+
+Note:
+- check the web side for update e.g. breaking changes
+- e.g. for filtering feat: und fix: for release notes
+- precommit, commitizen,
+
+
+---
+## Commits - Support/Checks
+
+- [Precommit](https://pre-commit.com)
+  - [Precommit - rust alternative](https://github.com/j178/prek)
+- [Commitizen](https://commitizen-tools.github.io/commitizen/)
+- [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog)
+
+
+----
+# Exercise - Maintainer find Bug
+
+- Apply `git bisect` [manpage](https://git-scm.com/docs/git-bisect)
+- Apply `git blame`  [manpage](https://git-scm.com/docs/git-blame)
+
+
+----
+# Exercise - Split last Commit
+
+- Checkout branch `split-last-commit`
+- Run `git log -1 --name-only --oneline` to see the last commit
+  modifying two files `a.txt` and `b.txt`
+- Task: Split into two commits each modifying one file each
+
+
+---
+## Split last Commit - Hints
+
+Use the following git commands
+```
+git checkout
+git commit
+git revert
+git rebase
+```
+
+
+---
+## Split last Commit - Solution
+
+
+
+
+----
+# Exercise - Sort in Review Fixes
+
+
+----
+# Exercise - Maintainer find Bug
+
+
+          </textarea>
+        </section>
+      </div>
+    </div>
+
+    <script src="./dist/reveal.js"></script>
+
+    <script src="./mermaid/dist/mermaid.min.js"></script>
+
+    <script src="./plugin/markdown/markdown.js"></script>
+    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="./plugin/zoom/zoom.js"></script>
+    <script src="./plugin/notes/notes.js"></script>
+    <script src="./plugin/math/math.js"></script>
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        slideNumber: true,
+        highlight: {
+          highlightOnLoad: false
+        },
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath
+        ]
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"transition":"fade","_":["slides.md"],"static":"build"}, queryOptions);
+    </script>
+
+
+    <script>
+      Reveal.initialize(options);
+      Reveal.addEventListener('ready', function (event) {
+        const blocks = Reveal.getRevealElement().querySelectorAll('pre code:not(.mermaid)');
+        const hlp = Reveal.getPlugin('highlight');
+        blocks.forEach(hlp.highlightBlock);
+      });
+    </script>
+
+    <script>
+      const mermaidOptions = extend({ startOnLoad: false }, {});
+      mermaid.startOnLoad = false;
+      mermaid.initialize(mermaidOptions);
+      const cb = function (event) {
+        mermaid.init(mermaidOptions, '.stack.present > .present pre code.mermaid');
+        mermaid.init(mermaidOptions, '.slides > .present:not(.stack) pre code.mermaid');
+      }
+      Reveal.addEventListener('ready', cb);
+      Reveal.addEventListener('slidetransitionend', cb);
+    </script>
+  </body>
+</html>
