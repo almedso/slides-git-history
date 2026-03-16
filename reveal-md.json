@@ -1,0 +1,14 @@
+{
+    "title": "Git History",
+    "separator": "----",
+    "verticalSeparator": "---",
+    "data-separator-notes": "^Note:",
+    "theme": "solarized",
+    "revealOptions": {
+        "transition": "fade"
+    },
+    "preprocessor": "preproc.js",
+    "asset-dir": "media",
+    "scripts": [
+    ]
+}
