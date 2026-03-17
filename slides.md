@@ -138,7 +138,19 @@ git rebase
 
 ## Split last Commit - Solution
 
+```
+Modify a and  b: &Delta; a, &Delta; b
+==>
+Modify a: &Delta; a
+Modify b: &Delta; b
+```
 
+```
+git checkout exercise-01
+checkout HEAD^ -- b.txt # or git restore --source=HEAD^ b.txt
+git commit -a -m "Modify a"
+git revert HEAD --message "Modfy b"
+git rebase -i HEAD~4 # squash HEAD~1 and HEAD~2
 
 # Exercise - Sort in Review Fixes
 
