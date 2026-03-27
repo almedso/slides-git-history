@@ -121,10 +121,10 @@ Note:
 
 # Exercise - Split last Commit
 
-- Checkout branch `split-last-commit`
+- Checkout branch `exercise-01`
 - Run `git log -1 --name-only --oneline` to see the last commit
-  modifying two files `a.txt` and `b.txt`
-- Task: Split into two commits each modifying one file each
+  that modifies two files `a.txt` and `b.txt`
+- Task: Split into two commits each modifying one file
 
 ## Split last Commit - Hints
 
@@ -138,21 +138,44 @@ git rebase
 
 ## Split last Commit - Solution
 
-```
-Modify a and  b: &Delta; a, &Delta; b
-==>
-Modify a: &Delta; a
-Modify b: &Delta; b
-```
-
-```
+Compare result with branch excercise-01_solution
+```bash
 git checkout exercise-01
-checkout HEAD^ -- b.txt # or git restore --source=HEAD^ b.txt
+git checkout HEAD^ -- b.txt #or git restore --source=HEAD^ b.txt
 git commit -a -m "Modify a"
-git revert HEAD --message "Modfy b"
-git rebase -i HEAD~4 # squash HEAD~1 and HEAD~2
+git revert HEAD --no-edit
+git commit --amend --message "Modify b"
+git rebase -i HEAD~3 #squash HEAD~1 and HEAD~2; adjust commit msg
+```
 
 # Exercise - Sort in Review Fixes
+
+- Checkout branch `exercise-02`
+- Run `git log -4 --name-only --oneline` to see the last commits
+- Task: Assume a review that requires changes to every file
+  `"new content" --> "new reviewed content"`, sort them into
+  the respective commits
+- Result in branch `exercise-02_solution`
+
+## Exercise - Hints
+
+Use the following git commands
+```bash
+git add
+git commit
+git rebase -i #or --interactive
+```
+
+## Exercise - Solution
+```bash
+git checkout exercise-02
+#Modify a.txt,  b.txt, c.txt
+git add exercise/a.txt ; git commit -m "Review a"
+git add exercise/b.txt ; git commit -m "Review b"
+git add exercise/c.txt ; git commit -m "Review c"
+git rebase --interactive HEAD~7
+#reorder and squash
+```
 
 # Exercise - Maintainer find Bug
 
