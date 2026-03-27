@@ -25,13 +25,15 @@ Note:
 
 - Determine which commits constitute a release
 - Verify review signoffs of all commits that contribute to a release
-- Verify that authors, committers and reviewers have confirmed QM that they
+- Verify that authors, committers and reviewers have confirmed, that they
   follow all QM policies (SOP)
 
 ## DevSecOps
 
-- Verify that only trusted source (composed only of verified commits) is used
+- Verify that only trusted source is used
   for production/release build
+- Prevent supply chain attact and side channel attacks
+- Requires verified commits
 
 ## Maintainer
 
@@ -114,10 +116,6 @@ Note:
 - [Commitizen](https://commitizen-tools.github.io/commitizen/)
 - [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog)
 
-# Exercise - Maintainer find Bug
-
-- Apply `git bisect` [manpage](https://git-scm.com/docs/git-bisect)
-- Apply `git blame`  [manpage](https://git-scm.com/docs/git-blame)
 
 # Exercise - Split last Commit
 
@@ -177,5 +175,8 @@ git rebase --interactive HEAD~7
 #reorder and squash
 ```
 
-# Exercise - Maintainer find Bug
+# Exercise - Find Bug
+
+- Apply `git bisect` [manpage](https://git-scm.com/docs/git-bisect)
+- Apply `git blame`  [manpage](https://git-scm.com/docs/git-blame)
 
