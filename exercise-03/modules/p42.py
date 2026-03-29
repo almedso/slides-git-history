@@ -1,5 +1,5 @@
-A = 303
-B = -87
+A = 300
+B = -86
 
 def add():
     return A + B
