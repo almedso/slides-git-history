@@ -1,0 +1,8 @@
+A = 302
+B = 119
+
+def add():
+    return A + B
+
+def subtract():
+    return A - B
