@@ -175,7 +175,15 @@ git rebase --interactive HEAD~7
 #reorder and squash
 ```
 
-# Exercise - Find Bug
+# Exercise - Find A Bug
+
+- Which file introduces a bug?
+- Checkout branch `exercise-03_last-known-good`
+- Try easy at `exercise-03_easy`
+- Try difficult at `exercise-03_difficult`
+
+
+## Excercise - Hints
 
 - Apply `git bisect` [manpage](https://git-scm.com/docs/git-bisect)
 - Apply `git blame`  [manpage](https://git-scm.com/docs/git-blame)
